@@ -1,9 +1,0 @@
-entry:
-  toggleAll: "ca-entry-toggleall"
-  input: "ca-entry-input"
-item:
-  complete: "ca-item-complete"
-  input: "ca-item-input"
-  remove: "ca-item-remove"
-footer:
-  clearComplete: "ca-footer-clearcomplete"
