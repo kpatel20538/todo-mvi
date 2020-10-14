@@ -1,5 +1,5 @@
 import { createItem, updateInput } from "./entry";
-import { loadItems, completeItem, removeItem, updateItem } from "./item";
+import { loadItems, completeItem, removeItem, updateItem } from "./items";
 import { endEdit, startEdit } from "./edit";
 import { selectTab } from "./navigation";
 import { clearComplete, toggleAll } from "./complete";

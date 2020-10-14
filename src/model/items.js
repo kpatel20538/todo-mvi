@@ -17,19 +17,21 @@ const removeSlice = (array, idx, length = 1) => [
   ...array.slice(idx + length),
 ];
 
+const assign = (target, source) => ({ ...target, ...source });
+
 const reducer = (state, action) =>
   select({
     [actionType.loadItems]: ({ values }) => values,
     [actionType.createItem]: ({ value }) =>
       unshift(state, { title: value, complete: false }),
     [actionType.updateItem]: ({ idx, value }) =>
-      replace(state, idx, (item) => ({ ...item, title: value })),
+      replace(state, idx, (item) => assign(item, { title: value })),
     [actionType.completeItem]: ({ idx }) =>
-      replace(state, idx, (item) => ({ ...item, complete: !item.complete })),
+      replace(state, idx, (item) => assign(item, { complete: !item.complete })),
     [actionType.removeItem]: ({ idx }) => removeSlice(state, idx),
     [actionType.toggleAll]: () => {
       const complete = !state.every(({ complete }) => complete);
-      return state.map((item) => ({ ...item, complete }));
+      return state.map((item) => assign(item, { complete }));
     },
     [actionType.clearComplete]: () => state.filter(({ complete }) => !complete),
     _: () => state,
