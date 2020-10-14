@@ -1,13 +1,15 @@
 {
   "name": "cycle-app",
   "version": "1.0.0",
-  "main": "src/index.html",
+  "main": "public/index.html",
   "license": "MIT",
   "scripts": {
     "start": "parcel serve src/index.html",
-    "build": "parcel build src/index.html"
+    "build": "parcel build src/index.html",
+    "serve-prod": "http-server"
   },
   "devDependencies": {
+    "http-server": "^0.12.3",
     "parcel": "^2.0.0-beta.1"
   },
   "dependencies": {
