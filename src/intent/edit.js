@@ -1,26 +1,30 @@
 import xs from "xstream";
-import { item } from "../common/classNames.yaml";
+import { dom, actionType } from "../common/constants.yaml";
 import { toSelector, getData } from "../common/dom";
 import { type } from "../common/actions";
 
 export const startEdit = ({ DOM }) => {
-  const doubleClick$ = DOM.select(toSelector(item.input)).events("dblclick");
-  const focus$ = DOM.select(toSelector(item.input)).events("focus");
+  const selector = toSelector(dom.itemInput);
+
+  const doubleClick$ = DOM.select(selector).events("dblclick");
+  const focus$ = DOM.select(selector).events("focus");
 
   return xs.merge(doubleClick$, focus$).map((event) => ({
-    [type]: "startEdit",
+    [type]: actionType.startEdit,
     idx: Number(getData(event.target, "idx")),
   }));
 };
 
 export const endEdit = ({ DOM }) => {
-  const blur$ = DOM.select(toSelector(item.input)).events("blur");
-  const enterOrTab$ = DOM.select(toSelector(item.input))
+  const selector = toSelector(dom.itemInput);
+
+  const blur$ = DOM.select(selector).events("blur");
+  const enterOrTab$ = DOM.select(selector)
     .events("keydown")
     .filter((event) => event.key === "Enter" || event.key === "Tab");
 
   return xs.merge(blur$, enterOrTab$).map((event) => ({
-    [type]: "endEdit",
+    [type]: actionType.endEdit,
     idx: Number(getData(event.target, "idx")),
   }));
 };

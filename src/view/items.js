@@ -1,11 +1,11 @@
 import html from "snabby";
 import xs from "xstream";
-import { item as classNames } from "../common/classNames.yaml"
+import { dom } from "../common/constants.yaml"
 
 const Checkbox = ({ complete }) => html`
   <button
     @class=${{
-      [classNames.complete]: true,
+      [dom.itemComplete]: true,
       button: true,
       "is-inverted": true,
       "is-primary": complete,
@@ -25,7 +25,7 @@ const Checkbox = ({ complete }) => html`
 const Input = ({ item, isEditing }) => html`
   <input
     @class=${{
-      [classNames.input]: true,
+      [dom.itemInput]: true,
       input: true,
       "is-static": !isEditing,
       "strike-through": item.complete,
@@ -47,7 +47,7 @@ const TodoItem = ({ item, isEditing }) => html`
         "is-hidden": isEditing,
       }}
     >
-      <button class="${classNames.remove} button is-inverted is-danger">
+      <button class="${dom.itemRemove} button is-inverted is-danger">
         <i class="fas fa-times "></i>
       </button>
     </div>

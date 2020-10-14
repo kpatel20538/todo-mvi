@@ -1,11 +1,12 @@
 import xs from "xstream";
+import { actionType } from "../common/constants.yaml"
 import { select } from "../common/actions";
 
 const intitialState = null;
 const reducer = (state, action) => {
   return select({
-    startEdit: ({ idx }) => idx,
-    endEdit: () => null,
+    [actionType.startEdit]: ({ idx }) => idx,
+    [actionType.endEdit]: () => null,
     _: () => state,
   })(action);
 };

@@ -1,5 +1,5 @@
 import html from "snabby";
-import { footer as classNames } from "../common/classNames.yaml"
+import { dom } from "../common/constants.yaml"
 
 const Footer = ({ activeCount$ }) =>
   activeCount$.map(
@@ -15,7 +15,7 @@ const Footer = ({ activeCount$ }) =>
         </div>
         <div class="level-right">
           <div class="level-item">
-            <button class="${classNames.clearComplete} button is-white">
+            <button class="${dom.clearComplete} button is-white">
               <div class="heading">Clear complete</div>
             </button>
           </div>

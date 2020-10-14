@@ -7,11 +7,13 @@ const filters = {
 };
 
 export const tabs = ({ items$ }) =>
-  items$.map((items) => ({
-    all: filters.all(items),
-    complete: filters.complete(items),
-    active: filters.active(items),
-  }));
+  items$
+    .map((items) => items.map((item, idx) => ({ ...item, idx })))
+    .map((items) => ({
+      all: filters.all(items),
+      complete: filters.complete(items),
+      active: filters.active(items),
+    }));
 
 export const isAllComplete = ({ tabs$ }) =>
   tabs$

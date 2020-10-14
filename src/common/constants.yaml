@@ -1,0 +1,21 @@
+dom:
+  toggleAll: "mvi-toggle-all"
+  entryInput: "mvi-entry-input"
+  itemComplete: "mvi-item-complete"
+  itemInput: "mvi-item-input"
+  itemRemove: "mvi-item-remove"
+  clearComplete: "mvi-clear-complete"
+storageKey:
+  items: "items"
+actionType:
+  createItem: "create-item"
+  completeItem: "complete-item"
+  removeItem: "remove-item"
+  updateItem: "update-item"
+  loadItems: "load-items"
+  updateInput: "update-input"
+  startEdit: "start-edit"
+  endEdit: "end-edit"
+  toggleAll: "toggle-all"
+  selectTab: "select-tab"
+  clearComplete: "clear-complete"

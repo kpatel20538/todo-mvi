@@ -1,4 +1,5 @@
 import xs from "xstream";
+import { actionType } from "../common/constants.yaml";
 import { select } from "../common/actions";
 
 const initialState = [];
@@ -9,20 +10,28 @@ const replace = (array, idx, updater) => [
   ...array.slice(idx + 1),
 ];
 
+const unshift = (array, item) => [item, ...array];
+
+const removeSlice = (array, idx, length = 1) => [
+  ...array.slice(0, idx),
+  ...array.slice(idx + length),
+];
+
 const reducer = (state, action) =>
   select({
-    loadItems: ({ values }) => values,
-    createItem: ({ value }) => [{ title: value, complete: false }, ...state],
-    updateItem: ({ idx, value }) =>
+    [actionType.loadItems]: ({ values }) => values,
+    [actionType.createItem]: ({ value }) =>
+      unshift(state, { title: value, complete: false }),
+    [actionType.updateItem]: ({ idx, value }) =>
       replace(state, idx, (item) => ({ ...item, title: value })),
-    completeItem: ({ idx }) =>
+    [actionType.completeItem]: ({ idx }) =>
       replace(state, idx, (item) => ({ ...item, complete: !item.complete })),
-    removeItem: ({ idx }) => [...state.slice(0, idx), ...state.slice(idx + 1)],
-    toggleAll: () => {
+    [actionType.removeItem]: ({ idx }) => removeSlice(state, idx),
+    [actionType.toggleAll]: () => {
       const complete = !state.every(({ complete }) => complete);
       return state.map((item) => ({ ...item, complete }));
     },
-    clearComplete: () => state.filter(({ complete }) => !complete),
+    [actionType.clearComplete]: () => state.filter(({ complete }) => !complete),
     _: () => state,
   })(action);
 
@@ -45,5 +54,4 @@ export const items = ({
       toggleAll$,
       clearComplete$
     )
-    .fold(reducer, initialState)
-    .map((items) => items.map((item, idx) => ({ ...item, idx })));
+    .fold(reducer, initialState);

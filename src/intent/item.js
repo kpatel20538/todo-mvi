@@ -1,39 +1,38 @@
-import xs from "xstream";
 import dropRepeats from "xstream/extra/dropRepeats";
-import { item } from "../common/classNames.yaml";
+import { dom, storageKey, actionType } from "../common/constants.yaml";
 import { toSelector, getData } from "../common/dom";
 import { type } from "../common/actions";
 
 export const loadItems = ({ storage }) =>
   storage.local
-    .getItem("items")
+    .getItem(storageKey.items)
     .compose(dropRepeats())
     .map((items) => ({
-      [type]: "loadItems",
+      [type]: actionType.loadItems,
       values: items ? JSON.parse(items) : [],
     }));
 
 export const completeItem = ({ DOM }) =>
-  DOM.select(toSelector(item.complete))
+  DOM.select(toSelector(dom.itemComplete))
     .events("click")
     .map((event) => ({
-      [type]: "completeItem",
+      [type]: actionType.completeItem,
       idx: Number(getData(event.target, "idx")),
     }));
 
 export const removeItem = ({ DOM }) =>
-  DOM.select(toSelector(item.remove))
+  DOM.select(toSelector(dom.itemRemove))
     .events("click")
     .map((event) => ({
-      [type]: "removeItem",
+      [type]: actionType.removeItem,
       idx: Number(getData(event.target, "idx")),
     }));
 
 export const updateItem = ({ DOM }) =>
-  DOM.select(toSelector(item.input))
+  DOM.select(toSelector(dom.itemInput))
     .events("input")
     .map((event) => ({
-      [type]: "updateItem",
+      [type]: actionType.updateItem,
       idx: Number(getData(event.target, "idx")),
       value: event.target.value,
     }));

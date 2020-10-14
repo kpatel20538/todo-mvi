@@ -1,11 +1,12 @@
 import xs from "xstream";
+import { actionType } from "../common/constants.yaml"
 import { select } from "../common/actions";
 
 const intitialState = "";
 const reducer = (state, action) => {
   return select({
-    createItem: () => "",
-    updateInput: ({ value }) => value,
+    [actionType.createItem]: () => "",
+    [actionType.updateInput]: ({ value }) => value,
     _: () => state,
   })(action);
 };

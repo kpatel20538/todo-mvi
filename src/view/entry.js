@@ -1,6 +1,6 @@
 import html from "snabby";
 import xs from "xstream";
-import { entry as classNames } from "../common/classNames.yaml";
+import { dom } from "../common/constants.yaml";
 
 const Entry = ({ entry$, isAllComplete$, hasItems$ }) =>
   xs.combine(entry$, isAllComplete$, hasItems$).map(
@@ -9,7 +9,7 @@ const Entry = ({ entry$, isAllComplete$, hasItems$ }) =>
         <div @class=${{ control: true, "opacity-0": !hasItems }}>
           <button
             @class=${{
-              [classNames.toggleAll]: true,
+              [dom.toggleAll]: true,
               button: true,
               "is-inverted": true,
               "is-dark": true,
@@ -22,9 +22,9 @@ const Entry = ({ entry$, isAllComplete$, hasItems$ }) =>
         </div>
         <div class="control is-expanded">
           <input
-            class="${classNames.input} input is-static"
+            class="${dom.entryInput} input is-static"
             type="text"
-            placeholder="What needs to been done?"
+            placeholder="What needs to be done?"
             @props:value=${entry}
           />
         </div>
